@@ -1,1 +1,24 @@
 
+<main>
+    <div class="">
+        <form [formGroup]="registrationForm" class="flex flex-col">
+            <mat-form-field >
+                <input matInput placeholder="Firm name" formControlName="firmName">
+                <mat-error *ngIf="registrationForm.get('firmName')?.invalid">Please enter the Firm Name</mat-error>
+            </mat-form-field>
+            <mat-form-field >
+               <input matInput placeholder="Firm email" formControlName="email">
+               <mat-error *ngIf="registrationForm.get('email')?.invalid">Please enter the Firm Email</mat-error>
+            </mat-form-field>  
+
+            <button mat-button>
+              Create Firm
+            </button>
+        </form>
+        <div>
+          <p>Do you want to user the current users data for Firm data?</p>
+          <p>{{data?.userName}}</p>
+          <p>{{data?.email}}</p>
+        </div>
+    </div>
+</main>

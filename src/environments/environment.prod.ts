@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  firebaseConfig : {
+  firebaseConfig :  {
     apiKey: "AIzaSyCj1nu5_aOlwmu8pOSZ6-qYz0cOOm05Pkw",
     authDomain: "rental-management-app-e8cbb.firebaseapp.com",
     projectId: "rental-management-app-e8cbb",
