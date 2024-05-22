@@ -1,5 +1,5 @@
 
-<main>
+<main class="register-container-wrapper">
     <div class="">
         <form [formGroup]="registrationForm" class="flex flex-col">
             <mat-form-field >
@@ -11,14 +11,19 @@
                <mat-error *ngIf="registrationForm.get('email')?.invalid">Please enter the Firm Email</mat-error>
             </mat-form-field>  
 
-            <button mat-button>
+            <button mat-raised-button color="primary" [disabled]="registrationForm.invalid" (click)="createFirm()" >
               Create Firm
             </button>
+            <div class="flex flex-col">
+              <p>Do you want to user the current users data for Firm data?</p>
+              <mat-checkbox formControlName="firmName" name="name" (change)="onCheckbox($event)">
+                {{data?.userName}}
+              </mat-checkbox>
+              <mat-checkbox formControlName="email" name="email" (change)="onCheckbox($event)">
+                {{data?.email}}
+              </mat-checkbox>
+    
+            </div>
         </form>
-        <div>
-          <p>Do you want to user the current users data for Firm data?</p>
-          <p>{{data?.userName}}</p>
-          <p>{{data?.email}}</p>
-        </div>
     </div>
 </main>

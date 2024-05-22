@@ -1,5 +1,8 @@
-<nav class="flex justify-between items-center px-6 py-2 text-black">
+<nav *ngIf="!isLoggedIn" class="flex justify-between items-center px-6 py-2 text-black">
     <div>About Us</div>
     <div>Pricing</div>
     <div (click)="registerLoginButton()">Register/Login</div>
+</nav>
+<nav *ngIf="isLoggedIn" class="flex justify-between items-center px-6 py-2 text-black">
+    <div (click)="logout()">Logout</div>
 </nav>

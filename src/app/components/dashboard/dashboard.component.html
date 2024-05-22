@@ -1,1 +1,11 @@
 <p>dashboard works!</p>
+<h1 class="text-4xl">
+    {{firmData?.firmId}}
+
+</h1>
+<h2 *ngFor="let user of firmData?.userDatabase">
+    {{user.email}}
+</h2>
+<h1>
+    {{currentUser.email}}
+</h1>

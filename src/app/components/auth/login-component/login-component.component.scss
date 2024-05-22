@@ -1,0 +1,25 @@
+
+.login-form-wrapper{
+    background-image: linear-gradient( 109.6deg,  rgba(112,246,255,0.33) 11.2%, rgba(221,108,241,0.26) 42%, rgba(229,106,253,0.71) 71.5%, rgba(123,183,253,1) 100.2% );
+
+}
+
+@mixin hr-line {
+    flex: 1;
+    background: #c7c7c7;
+    content: "";
+    height: 1px;
+    display: inline-block;
+    width: 50px;    
+    position: relative;
+    bottom: 4px;
+  }
+.hr-text{
+    &::after{
+        @include hr-line;
+    }
+    &::before{
+        @include hr-line;
+    }
+}
+

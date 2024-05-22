@@ -39,3 +39,17 @@ $rent-management-ui-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.login-dialog-container .mat-dialog-container{
+  padding: 0px !important;
+}
+.register-dialog-container .mat-dialog-container{
+  padding: 0px !important;
+}
+
+.green-check {
+  color: green;
+}
+
+.red-close {
+  color: red;
+}
