@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/models/User';
 import { AuthServiceService } from 'src/app/shared/services/auth-service.service';
@@ -13,7 +13,7 @@ import { LoginComponentComponent } from '../auth/login-component/login-component
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit,AfterViewInit {
   currentUser: User = {
     userName: '',
     email: '',
@@ -23,6 +23,8 @@ export class DashboardComponent implements OnInit {
     photoUrl: ''
   };
   firmData:FirmData | undefined
+  buttonList:any = ["Overview","Generate Invoice"]
+  pageName:string ='overview'
   constructor(private authService:AuthServiceService,
      private dialogRef:MatDialog,
     private router:Router,
@@ -33,6 +35,9 @@ export class DashboardComponent implements OnInit {
         }
       })
      }
+  ngAfterViewInit(): void {
+    // this.checkAdmin() ? this.buttonList.push("Enter Data"): null
+  }
 
   ngOnInit(): void {
     this.getCurrentUser()
@@ -46,11 +51,11 @@ export class DashboardComponent implements OnInit {
       if(user){
         this.initializeCurrentUser(user)
       }else{
-        this.router.navigate([''])
+        // this.router.navigate([''])
       }
       
     }
-  })
+  }) 
  }
 
  // gets all data from the database
@@ -101,6 +106,7 @@ export class DashboardComponent implements OnInit {
           }
         )
        }
+       this.checkAdmin()
       }
     }
   })
@@ -116,4 +122,24 @@ export class DashboardComponent implements OnInit {
           this.messageBusService.setCurrentUser(this.currentUser)          
         }
 
+  checkAdmin(){
+    if(this.firmData?.adminList.some(a=>a==this.currentUser.email)){
+      this.currentUser.role == 'admin';
+      this.messageBusService.setCurrentUser(this.currentUser)
+      this.buttonList.push("Enter Data")
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  pageNavigation(flag:string){
+    if(flag.toLowerCase()=="generate invoice"){
+      this.pageName = flag.toLowerCase();
+    }else if(flag.toLowerCase()=="overview"){
+      this.pageName = flag.toLowerCase();
+    }else if(flag.toLowerCase()=="profile"){
+      this.pageName = flag.toLowerCase();
+    }
+  }
 }

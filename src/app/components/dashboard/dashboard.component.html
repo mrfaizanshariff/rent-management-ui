@@ -1,11 +1,20 @@
-<p>dashboard works!</p>
-<h1 class="text-4xl">
-    {{firmData?.firmId}}
-
-</h1>
-<h2 *ngFor="let user of firmData?.userDatabase">
-    {{user.email}}
-</h2>
-<h1>
-    {{currentUser.email}}
-</h1>
+<main class="flex h-[100vh]">
+ <div class="side-nav w-[15%] bg-[#d3d5e2] pl-3 py-4 border border-red-500">
+    <div class="upper-side-nav flex flex-col justify-start gap-6 h-1/2">
+       <ng-container *ngFor="let button of buttonList">
+        <button class="side-nav-btn" (click)="pageNavigation(button)">
+            {{button}}
+        </button>
+       </ng-container>
+       
+    </div>
+    <div class="lower-side-nav flex h-1/2 flex-col justify-end">
+        <button class="side-nav-btn" (click)="pageNavigation('profile')">
+            Profile
+        </button>
+    </div>
+ </div>
+ <div class="main-nav w-[85%] border border-blue-500">
+    <app-dashboard-overview *ngIf="pageName=='overview'"></app-dashboard-overview>
+ </div>
+</main>

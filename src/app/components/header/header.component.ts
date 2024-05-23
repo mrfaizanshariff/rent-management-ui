@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
+import { FirmData } from 'src/app/models/FirmData';
 import { AuthServiceService } from 'src/app/shared/services/auth-service.service';
+import { MessageBusService } from 'src/app/shared/services/message-bus.service';
 
 @Component({
   selector: 'app-header',
@@ -10,12 +12,19 @@ import { AuthServiceService } from 'src/app/shared/services/auth-service.service
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isLoggedIn: boolean = false;  
+  isLoggedIn: boolean = false; 
+  firmData!:FirmData 
   constructor(private afAuth:AuthServiceService,
     private fireAuth:AngularFireAuth,
-    private router:Router
+    private router:Router,
+    private messageBusService:MessageBusService
   ) { 
-    this.isLoggedInMethod()
+    this.isLoggedInMethod();
+    messageBusService.getFirmDatabase().subscribe({
+      next:(res)=>{
+        this.firmData = res;
+      }
+    })
   }
 
   ngOnInit(): void {

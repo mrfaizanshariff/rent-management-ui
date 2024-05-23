@@ -17,6 +17,7 @@ import { getAuth,provideAuth } from '@angular/fire/auth';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { DashboardOverviewComponent } from './components/dashboard/dashboard-overview/dashboard-overview.component';
 // import { getAuth } from 'firebase/auth';
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     LoginComponentComponent,
     DashboardComponent,
     HeaderComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    DashboardOverviewComponent
   ],
   imports: [
     BrowserModule,

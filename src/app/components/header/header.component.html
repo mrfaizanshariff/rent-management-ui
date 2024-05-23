@@ -4,5 +4,6 @@
     <div (click)="registerLoginButton()">Register/Login</div>
 </nav>
 <nav *ngIf="isLoggedIn" class="flex justify-between items-center px-6 py-2 text-black">
+    <div>{{firmData?.firmName}}</div>
     <div (click)="logout()">Logout</div>
 </nav>
