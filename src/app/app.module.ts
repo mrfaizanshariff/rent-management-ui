@@ -18,6 +18,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { DashboardOverviewComponent } from './components/dashboard/dashboard-overview/dashboard-overview.component';
+import { DataEntryComponent } from './components/dashboard/data-entry/data-entry.component';
+import { InvoiceOverviewComponent } from './components/dashboard/invoice-overview/invoice-overview.component';
+import { AddPropertyDialogComponent } from './components/add-property-dialog/add-property-dialog.component';
+import { AddTenantDialogComponent } from './components/add-tenant-dialog/add-tenant-dialog.component';
 // import { getAuth } from 'firebase/auth';
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { DashboardOverviewComponent } from './components/dashboard/dashboard-ove
     DashboardComponent,
     HeaderComponent,
     LandingPageComponent,
-    DashboardOverviewComponent
+    DashboardOverviewComponent,
+    DataEntryComponent,
+    InvoiceOverviewComponent,
+    AddPropertyDialogComponent,
+    AddTenantDialogComponent
   ],
   imports: [
     BrowserModule,

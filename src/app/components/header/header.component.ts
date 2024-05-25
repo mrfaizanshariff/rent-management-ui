@@ -20,9 +20,10 @@ export class HeaderComponent implements OnInit {
     private messageBusService:MessageBusService
   ) { 
     this.isLoggedInMethod();
-    messageBusService.getFirmDatabase().subscribe({
+    this.messageBusService.getFirmDatabase().subscribe({
       next:(res)=>{
         this.firmData = res;
+        console.log(this.firmData)
       }
     })
   }

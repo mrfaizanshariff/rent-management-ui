@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit,AfterViewInit {
     userCreatedTime:new Date() ,
     photoUrl: ''
   };
-  firmData:FirmData | undefined
+  firmData!:FirmData
   buttonList:any = ["Overview","Generate Invoice"]
   pageName:string ='overview'
   constructor(private authService:AuthServiceService,
@@ -42,6 +42,9 @@ export class DashboardComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
     this.getCurrentUser()
     this.getAllDataFromFirbase()
+    if(this.pageName=='overview'){
+      this.router.navigate(['/dashboard/overview']);
+    }
   }
 
 //gets the current user from the database
@@ -51,6 +54,7 @@ export class DashboardComponent implements OnInit,AfterViewInit {
       if(user){
         this.initializeCurrentUser(user)
       }else{
+        //TODO give the google sign in popup when the user refresh the dashboard page
         // this.router.navigate([''])
       }
       
@@ -94,7 +98,7 @@ export class DashboardComponent implements OnInit,AfterViewInit {
         this.messageBusService.setFirmdatabase(data?.docs[firmIndex].data())
        }else{
         // When a new user logs in. might be a employee or a new firm owner.
-        
+        if(this.currentUser.email)
         this.dialogRef.open(
           LoginComponentComponent,{
             data: {
@@ -136,10 +140,18 @@ export class DashboardComponent implements OnInit,AfterViewInit {
   pageNavigation(flag:string){
     if(flag.toLowerCase()=="generate invoice"){
       this.pageName = flag.toLowerCase();
+      this.router.navigate(['/dashboard/invoice']);
+
     }else if(flag.toLowerCase()=="overview"){
       this.pageName = flag.toLowerCase();
+      this.router.navigate(['/dashboard/overview']);
+
     }else if(flag.toLowerCase()=="profile"){
       this.pageName = flag.toLowerCase();
+    }else if(flag.toLowerCase()=="enter data"){
+      this.pageName = flag.toLowerCase();
+      this.router.navigate(['/dashboard/dataentry']);
+
     }
   }
 }

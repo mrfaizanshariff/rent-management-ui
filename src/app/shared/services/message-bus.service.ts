@@ -7,19 +7,9 @@ import { FirmData } from "src/app/models/FirmData";
     providedIn: 'root'
   })
   export class MessageBusService {
-    dummyFirmData: FirmData ={
-        firmId:'',
-        firmName:'',
-        email:'',
-        totalRent:'',
-        pendingRent:'',
-        adminList:[],
-        userList:[],
-        userDatabase:[],
-        propertyDatabase:[]
-    }
-    currentUserSubject = new Subject<User>()
-    firmDatabase = new Subject<FirmData>()
+   
+    currentUserSubject = new BehaviorSubject<any>({})
+    firmDatabase = new BehaviorSubject<any>({})
     
     constructor (){}
 

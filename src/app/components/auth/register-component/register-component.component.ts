@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FirmData } from 'src/app/models/FirmData';
+import { Rent } from 'src/app/models/RentData';
 import { AuthServiceService } from 'src/app/shared/services/auth-service.service';
 import { MessageBusService } from 'src/app/shared/services/message-bus.service';
 
@@ -11,9 +12,24 @@ import { MessageBusService } from 'src/app/shared/services/message-bus.service';
   templateUrl: './register-component.component.html',
   styleUrls: ['./register-component.component.scss']
 })
+
 export class RegisterComponentComponent implements OnInit {
   registrationForm!: FormGroup<any>;
-
+  firmRentDataObj={
+    January: {totalRent:0,paidRent:0},
+    February: {totalRent:0,paidRent:0},
+    March: {totalRent:0,paidRent:0},
+    April: {totalRent:0,paidRent:0},
+    May: {totalRent:0,paidRent:0},
+    June: {totalRent:0,paidRent:0},
+    July: {totalRent:0,paidRent:0},
+    August: {totalRent:0,paidRent:0},
+    September: {totalRent:0,paidRent:0},
+    October: {totalRent:0,paidRent:0},
+    November: {totalRent:0,paidRent:0},
+    December: {totalRent:0,paidRent:0}
+  }
+  
   constructor(private formBuilder: FormBuilder,
      private authService:AuthServiceService,
      private router:Router,
@@ -43,6 +59,7 @@ export class RegisterComponentComponent implements OnInit {
         initialData.firmId = initialData['email']
         initialData['userDatabase']= [this.data]
         initialData['adminList'] = [this.data.email]
+        initialData['firmRentdata'] = this.firmRentDataObj
         console.log(initialData)
         this.authService.setInitialData(initialData,initialData.firmId)
         this.messageBusService.setFirmdatabase(initialData)

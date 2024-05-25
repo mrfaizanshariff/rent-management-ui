@@ -81,7 +81,16 @@ export class AuthServiceService {
               console.log('Error updating user list: ', error);
             })
             break;
-          
+          case 'propertyDatabase':
+            const currentPropertyDatabase = currentData['propertyDatabase'] || [];
+            const updatedPropertyDatabase = [...currentPropertyDatabase, newData];
+            firmDocRef.update({ propertyDatabase: updatedPropertyDatabase})
+            .then(()=>{
+              console.log("Property database successfully updated");
+            })
+            .catch(error=>{
+              console.log('Error updating property database: ', error);
+            });
         }
         
       }

@@ -1,0 +1,13 @@
+<main>
+    <div>
+        <form [formGroup]="propForm" class="flex flex-col">
+            <mat-form-field >
+                <input matInput placeholder="Add Property Name" formControlName="propName">
+                <mat-error *ngIf="propForm.get('propName')?.invalid">Please enter the Firm Name</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" [disabled]="propForm.invalid" (click)="addProp()" >
+              Save and Apply Changes
+            </button>
+        </form>
+    </div>
+</main>

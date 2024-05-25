@@ -5,5 +5,6 @@ export interface Invoice{
         invoiceDate: string,
         amountPaid: number,
         amountBalance: number,
+        rentAmount: number
       
 }
