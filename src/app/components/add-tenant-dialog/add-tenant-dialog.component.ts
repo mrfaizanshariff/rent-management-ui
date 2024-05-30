@@ -54,7 +54,7 @@ export class AddTenantDialogComponent implements OnInit, OnDestroy {
     // this.tenantDatabase['firmId'] = this.firmData.firmId;
     this.tenantDatabase['propertyId'] = this.propDatabase?.propertyId;
     if (this.firmData.tenantDatabase.length > 0) {
-      this.tenantDatabase['tenantId'] = `T${Number(this.firmData.tenantDatabase[this.firmData.tenantDatabase.length-1].tenantId.slice(1)+1)}`;
+      this.tenantDatabase['tenantId'] = `T${Number(this.firmData.tenantDatabase[this.firmData.tenantDatabase.length-1].tenantId.slice(1))+1}`;
     }else{  
       this.tenantDatabase['tenantId'] = 'T1'
     }
@@ -78,7 +78,7 @@ export class AddTenantDialogComponent implements OnInit, OnDestroy {
       console.log(this.tenantDatabase);
 
       this.messageBusService.setFirmdatabase(this.firmData);
-      this.authService.updateFirmDatabase(this.firmData.firmId, this.tenantDatabase, 'tenantDatabase')
+      this.authService.updateFirmDatabase(this.firmData.firmId, this.tenantDatabase, 'tenantDatabase').subscribe()
       this.dialogRef.close();
 
     }

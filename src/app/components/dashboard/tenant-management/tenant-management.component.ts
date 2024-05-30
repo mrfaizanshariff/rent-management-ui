@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { concatMap } from 'rxjs';
 import { FirmData } from 'src/app/models/FirmData';
 import { Tenant } from 'src/app/models/Tenant';
 import { AuthServiceService } from 'src/app/shared/services/auth-service.service';
@@ -52,17 +53,13 @@ private setAccordionData() {
 
  formatTimeStampToDate(timeStamp:any){
     
-  const milliseconds = timeStamp?.seconds * 1000 + Math.floor(timeStamp?.nanoseconds / 1e6) ;
-  if(milliseconds){
+  const milliseconds = timeStamp?.seconds * 1000 + Math.floor(timeStamp?.nanoseconds / 1e6);
+  if (milliseconds) {
     const date = new Date(milliseconds);
-    
-    const day = String(date.getUTCDate()).padStart(2, '0');
-    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-based
-    const year = date.getUTCFullYear();
-    
-    return `${day}/${month}/${year}`;
-
-  }else{
+    const options = { timeZone: 'Asia/Kolkata' }; // Adjust timezone as per your requirement
+    return date.toLocaleDateString('en-GB', options);
+  } else {
+    // Handle case when milliseconds are not present
     return new Date(timeStamp)?.toLocaleDateString('en-GB', { timeZone: 'Asia/Kolkata' });
   }
 
@@ -103,20 +100,20 @@ private setAccordionData() {
       phone:this.phoneNumber.value ? this.phoneNumber.value : tenant.phone
     }
     console.log(tenant,newData)
-    this.authService.updateFirmDatabase(this.firmData.firmId,newData,'editTenantDatabase').subscribe(res=>{
-      this.authService.getFirmData(this.firmData.firmId).subscribe({
-        next:(data)=>{
-          console.log(data.docs[0]?.data())
-          this.firmData = data.docs[0]?.data()
-          this.messageBusService.setFirmdatabase(this.firmData)
-          this.resetFormValues();
-          this.resetEditFlags();
-        },
-        error:()=>{
-          this.resetFormValues();
-          this.resetEditFlags();},
-      })
-    });
+    this.authService.updateFirmDatabase(this.firmData.firmId,newData,'editTenantDatabase').pipe(
+      concatMap(()=>this.authService.getFirmData(this.firmData.firmId))
+    ).subscribe({
+      next:(data)=>{
+        console.log(data.docs[0]?.data())
+        this.firmData = data.docs[0]?.data()
+        this.messageBusService.setFirmdatabase(this.firmData)
+        this.resetFormValues();
+        this.resetEditFlags();
+      },
+      error:()=>{
+        this.resetFormValues();
+        this.resetEditFlags();},
+    })
   }
 }
 resetEditFlags() {

@@ -32,7 +32,7 @@ export class AddPropertyDialogComponent implements OnInit {
   setPropDetails(){
       this.propDataBase['firmId'] = this.firmData.firmId
       if(this.firmData.propertyDatabase.length > 0){
-        this.propDataBase['propertyId'] = `P${Number(this.firmData.propertyDatabase[this.firmData.propertyDatabase.length-1].propertyId.slice(1)+1)}`
+        this.propDataBase['propertyId'] = `P${Number(this.firmData.propertyDatabase[this.firmData.propertyDatabase.length-1].propertyId.slice(1))+1}`
       }else{
         this.propDataBase['propertyId'] ="P1"
       }
@@ -43,7 +43,7 @@ export class AddPropertyDialogComponent implements OnInit {
       this.propDataBase.propertyName = this.propForm.controls['propName'].value
       this.firmData.propertyDatabase.push(this.propDataBase)
       this.messageBusService.setFirmdatabase(this.firmData)
-      this.authService.updateFirmDatabase(this.propDataBase.firmId,this.propDataBase,'propertyDatabase')
+      this.authService.updateFirmDatabase(this.propDataBase.firmId,this.propDataBase,'propertyDatabase').subscribe()
       this.dialogRef.close()
     }
   }

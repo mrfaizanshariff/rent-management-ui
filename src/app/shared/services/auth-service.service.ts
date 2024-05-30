@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Auth, GoogleAuthProvider,UserCredential,user } from '@angular/fire/auth';
-import { Observable, catchError, from,of } from 'rxjs';
+import { Observable, catchError, from,of, switchMap } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 @Injectable({
   providedIn: 'root'
@@ -52,83 +52,65 @@ export class AuthServiceService {
  getFirmData(firmId:string):Observable<any>{
   return from(this.fireStore.collection('firmDatabase',ref=>ref.where('firmId','==',firmId)).get())
  }
- updateFirmDatabase(firmId:string,newData:any,fieldTobeUpdated:any){
-  //get the document reference
-  const firmDocRef: AngularFirestoreDocument =  this.fireStore.doc(`firmDatabase/${firmId}`);
-  //getting the current doc data
-  return of(firmDocRef.get().subscribe({
-    next:(doc)=>{
-      if(doc.exists){
+ updateFirmDatabase(firmId: string, newData: any, fieldToBeUpdated: string): Observable<void> {
+  const firmDocRef: AngularFirestoreDocument = this.fireStore.doc(`firmDatabase/${firmId}`);
+
+  return firmDocRef.get().pipe(
+    switchMap(doc => {
+      if (doc.exists) {
         const currentData = doc.data()!;
-        //Based on the field name given will update thata particular field
-        switch (fieldTobeUpdated) {
+        let updateOperation: Promise<void>;
+
+        switch (fieldToBeUpdated) {
           case 'userDatabase':
             const currentUserDatabase = currentData['userDatabase'] || [];
             const updatedUserDatabase = [...currentUserDatabase, newData];
-            firmDocRef.update({ userDatabase: updatedUserDatabase })
-            .then(() => {
-            console.log('User database updated successfully');
-            })
-            .catch(error => {
-            console.error('Error updating user database:', error);
-            });
+            updateOperation = firmDocRef.update({ userDatabase: updatedUserDatabase });
             break;
+
           case 'userList':
             const currentUserList = currentData['userList'] || [];
             const updatedUserList = [...currentUserList, newData];
-            firmDocRef.update({ userList: updatedUserList })
-            .then(()=>{
-              console.log('Updated user list successfully');
-            })
-            .catch(error=>{
-              console.log('Error updating user list: ', error);
-            })
+            updateOperation = firmDocRef.update({ userList: updatedUserList });
             break;
+
           case 'propertyDatabase':
             const currentPropertyDatabase = currentData['propertyDatabase'] || [];
             const updatedPropertyDatabase = [...currentPropertyDatabase, newData];
-            firmDocRef.update({ propertyDatabase: updatedPropertyDatabase})
-            .then(()=>{
-              console.log("Property database successfully updated");
-            })
-            .catch(error=>{
-              console.log('Error updating property database: ', error);
-            });
-            break
+            updateOperation = firmDocRef.update({ propertyDatabase: updatedPropertyDatabase });
+            break;
+
           case 'tenantDatabase':
             const currentTenantDatabase = currentData['tenantDatabase'] || [];
             const updatedTenantDatabase = [...currentTenantDatabase, newData];
-            firmDocRef.update({ tenantDatabase: updatedTenantDatabase})
-            .then(()=>{
-              console.log("tenantDatabase successfully updated");
-            })
-            .catch(error=>{
-              console.log('Error updating tenantDatabase : ', error);
-            });
+            updateOperation = firmDocRef.update({ tenantDatabase: updatedTenantDatabase });
             break;
+
           case 'editTenantDatabase':
             const currentEditTenantDatabase = currentData['tenantDatabase'] || [];
-            
-            currentEditTenantDatabase.forEach((tenant:any,index:number)=>{
-              if(tenant.tenantId == newData?.tenantId){
-                currentEditTenantDatabase[index] = newData
+            currentEditTenantDatabase.forEach((tenant: any, index: number) => {
+              if (tenant.tenantId === newData?.tenantId) {
+                currentEditTenantDatabase[index] = newData;
               }
-            })
-            
-            firmDocRef.update({ tenantDatabase: currentEditTenantDatabase})
-            .then(()=>{
-              console.log("tenantDatabase successfully edited"); 
-            })
-            .catch(error=>{
-              console.log('Error updating tenantDatabase : ', error);
             });
+            updateOperation = firmDocRef.update({ tenantDatabase: currentEditTenantDatabase });
             break;
+
+          default:
+            return of(void 0);
         }
-        
+
+        return from(updateOperation);
+      } else {
+        return of(void 0);
       }
-    }
-  }))
- }
+    }),
+    catchError(error => {
+      console.error('Error in updateFirmDatabase:', error);
+      return of(void 0);
+    })
+  );
+}
  
 
  getCurrentUser(){

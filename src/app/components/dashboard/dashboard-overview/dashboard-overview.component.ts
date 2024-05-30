@@ -199,65 +199,65 @@ export class DashboardOverviewComponent implements OnInit{
 
     ],
   }
-  testTenantDb = [
-    {
-        "tenantId": "T1",
-        "rentStartDate": {
-            "seconds": 1714501800,
-            "nanoseconds": 765000000
-        },
-        "tenantName": "Mama Noora",
-        "propertyId": "P1",
-        "phone": "7338006388",
-        "rentDueDate": "5",
-        "rentAmount": 35000
-    },
-    {
-        "tenantId": "T2",
-        "rentStartDate": {
-            "seconds": 1714501800,
-            "nanoseconds": 765000000
-        },
-        "tenantName": "juice",
-        "propertyId": "P1",
-        "phone": "7338006388",
-        "rentDueDate": "5",
-        "rentAmount": 35000
-    },
-    {
-        "tenantId": "T3",
-        "rentStartDate": {
-            "seconds": 1714501800,
-            "nanoseconds": 765000000
-        },
-        "tenantName": "Mysore Kaapi",
-        "propertyId": "P1",
-        "phone": "7338006388",
-        "rentDueDate": "5",
-        "rentAmount": 35000
-    }
-]
-  testFirmRentDb = {
-    January: {totalRent:50000,paidRent:40000},
-    February: {totalRent:50000,paidRent:9000},
-    March: {totalRent:50000,paidRent:4000},
-    April: {totalRent:887000,paidRent:7800},
-    May: {totalRent:87412,paidRent:5545},
-    June: {totalRent:50000,paidRent:4000},
-    July: {totalRent:50000,paidRent:4000},
-    August: {totalRent:50000,paidRent:411},
-    September: {totalRent:50000,paidRent:4454},
-    October: {totalRent:50000,paidRent:7787},
-    November: {totalRent:50000,paidRent:7444},
-    December: {totalRent:50000,paidRent:50000}
-  }
+//   testTenantDb = [
+//     {
+//         "tenantId": "T1",
+//         "rentStartDate": {
+//             "seconds": 1714501800,
+//             "nanoseconds": 765000000
+//         },
+//         "tenantName": "Mama Noora",
+//         "propertyId": "P1",
+//         "phone": "7338006388",
+//         "rentDueDate": "5",
+//         "rentAmount": 35000
+//     },
+//     {
+//         "tenantId": "T2",
+//         "rentStartDate": {
+//             "seconds": 1714501800,
+//             "nanoseconds": 765000000
+//         },
+//         "tenantName": "juice",
+//         "propertyId": "P1",
+//         "phone": "7338006388",
+//         "rentDueDate": "5",
+//         "rentAmount": 35000
+//     },
+//     {
+//         "tenantId": "T3",
+//         "rentStartDate": {
+//             "seconds": 1714501800,
+//             "nanoseconds": 765000000
+//         },
+//         "tenantName": "Mysore Kaapi",
+//         "propertyId": "P1",
+//         "phone": "7338006388",
+//         "rentDueDate": "5",
+//         "rentAmount": 35000
+//     }
+// ]
+//   testFirmRentDb = {
+//     January: {totalRent:50000,paidRent:40000},
+//     February: {totalRent:50000,paidRent:9000},
+//     March: {totalRent:50000,paidRent:4000},
+//     April: {totalRent:887000,paidRent:7800},
+//     May: {totalRent:87412,paidRent:5545},
+//     June: {totalRent:50000,paidRent:4000},
+//     July: {totalRent:50000,paidRent:4000},
+//     August: {totalRent:50000,paidRent:411},
+//     September: {totalRent:50000,paidRent:4454},
+//     October: {totalRent:50000,paidRent:7787},
+//     November: {totalRent:50000,paidRent:7444},
+//     December: {totalRent:50000,paidRent:50000}
+//   }
   firmData!:FirmData
   totalRent:number = 0;
   paidRent:number = 0;
   properties:Property[] = [];
   monthList:string[] = [
     'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November','December'];
-  monthListFormcontrol = new FormControl(this.monthList[new Date().getMonth()]);
+  monthListFormcontrol = new FormControl();
   propertyListFormcontrol = new FormControl()
   dataSource= new MatTableDataSource();
   emptyData = new MatTableDataSource([{ empty: "row" }]);
@@ -299,20 +299,21 @@ export class DashboardOverviewComponent implements OnInit{
     this.getTableData(String(this.monthListFormcontrol.value))
   }
   getFirmRentdata(month:string){
-     this.totalRent =  this.filterObjectByKey(this.testFirmRentDb, month).totalRent
-     this.paidRent = this.filterObjectByKey(this.testFirmRentDb,month).paidRent
+     this.totalRent =  this.filterObjectByKey(this.firmData, month).totalRent
+     this.paidRent = this.filterObjectByKey(this.firmData,month).paidRent
      
     }
   formatTimeStampToDate(timeStamp:any){
     
-  const milliseconds = timeStamp?.seconds * 1000 + Math.floor(timeStamp?.nanoseconds / 1e6);
-  const date = new Date(milliseconds);
-  
-  const day = String(date.getUTCDate()).padStart(2, '0');
-  const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-based
-  const year = date.getUTCFullYear();
-  
-  return `${day}/${month}/${year}`;
+    const milliseconds = timeStamp?.seconds * 1000 + Math.floor(timeStamp?.nanoseconds / 1e6);
+    if (milliseconds) {
+      const date = new Date(milliseconds);
+      const options = { timeZone: 'Asia/Kolkata' }; // Adjust timezone as per your requirement
+      return date.toLocaleDateString('en-GB', options);
+    } else {
+      // Handle case when milliseconds are not present
+      return new Date(timeStamp)?.toLocaleDateString('en-GB', { timeZone: 'Asia/Kolkata' });
+    }
 
   }
   monthSelectionChange(event:any){

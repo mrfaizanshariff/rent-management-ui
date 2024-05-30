@@ -88,8 +88,8 @@ export class LoginComponentComponent implements OnInit {
       }
       firmData['userList'].push(this.currentUser.email)
       this.messageBusService.setFirmdatabase(firmData);
-      this.authService.updateFirmDatabase(firmId,this.currentUser.email,'userList')
-      this.authService.updateFirmDatabase(firmId,this.currentUser,'userDatabase')
+      this.authService.updateFirmDatabase(firmId,this.currentUser.email,'userList').subscribe()
+      this.authService.updateFirmDatabase(firmId,this.currentUser,'userDatabase').subscribe()
       this.selfDialogref.close()
     }
   }
