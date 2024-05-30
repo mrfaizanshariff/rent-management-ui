@@ -1,1 +1,116 @@
-<p>landing-page works!</p>
+<main class="h-full w-full main-container p-0 m-0">
+    <!-- hero section -->
+    <section class="hero-section flex justify-between h-full">
+        <div class="left flex pl-12 flex-col items-center justify-center">
+            <h1 class="text-6xl font-bold tracking-widest leading-[80px]">
+                KIRAYA-Manage Your Rentals Efficiently
+            </h1>
+            <h2 class="text-4xl font-bold tracking-widest leading-[40px]">
+                Simplify your rental management with our comprehensive platform.
+            </h2>
+        </div>
+        <div class="right w-[70%]">
+            <img [src]="bgImageUrl" class=" object-fill h-[80vh] w-[40vw]" alt="rent Management">
+        </div>
+    </section>
+    <!-- Features Section  -->
+    <section class="features-section mt-10">
+        <div class="flex flex-col px-12 justify-start gap-8 ">
+            <h1 class="text-6xl uppercase font-bold tracking-widest">Features</h1>
+            <h2 class="text-4xl font-semibold tracking-wide">
+                Powerful Features to Streamline Your Rental Management
+            </h2>
+            <div class="grid grid-cols-3 gap-4">
+                <mat-card>
+                    <mat-card-title class="!flex items-center">
+                       <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="60px" height="60px" viewBox="0 0 24 24"><path d="M15,8a1,1,0,0,1-1,1H6A1,1,0,0,1,6,7h8A1,1,0,0,1,15,8Zm-1,3H6a1,1,0,0,0,0,2h8a1,1,0,0,0,0-2Zm-4,4H6a1,1,0,0,0,0,2h4a1,1,0,0,0,0-2Zm13-3v8a3,3,0,0,1-3,3H4a3,3,0,0,1-3-3V4A3,3,0,0,1,4,1H16a3,3,0,0,1,3,3v7h3A1,1,0,0,1,23,12ZM17,4a1,1,0,0,0-1-1H4A1,1,0,0,0,3,4V20a1,1,0,0,0,1,1H17Zm4,9H19v8h1a1,1,0,0,0,1-1Z"/></svg>
+                       </span>
+                       <span class="font-semibold tracking-wider ml-4">
+                           Invoice Generation
+                       </span> 
+                    </mat-card-title>
+                    <mat-card-content>
+                        Streamline your billing with invoice creation. Track payments, send digitally signed invoices, and manage finances with ease, ensuring a smooth transaction process for both landlords and tenants.
+                    </mat-card-content>
+                </mat-card>
+                
+                <mat-card>
+                    <mat-card-title class="!flex items-center">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px" viewBox="0 0 24 24" fill="none">
+                                <path d="M12.9823 2.76424C12.631 2.49099 12.4553 2.35436 12.2613 2.30184C12.0902 2.2555 11.9098 2.2555 11.7387 2.30184C11.5447 2.35436 11.369 2.49099 11.0177 2.76424L4.23539 8.03937C3.78202 8.39199 3.55534 8.5683 3.39203 8.7891C3.24737 8.98469 3.1396 9.20503 3.07403 9.4393C3 9.70376 3 9.99094 3 10.5653V17.8002C3 18.9203 3 19.4804 3.21799 19.9082C3.40973 20.2845 3.71569 20.5905 4.09202 20.7822C4.51984 21.0002 5.0799 21.0002 6.2 21.0002H8.2C8.48003 21.0002 8.62004 21.0002 8.727 20.9457C8.82108 20.8978 8.89757 20.8213 8.9455 20.7272C9 20.6203 9 20.4803 9 20.2002V13.6002C9 13.0402 9 12.7601 9.10899 12.5462C9.20487 12.3581 9.35785 12.2051 9.54601 12.1092C9.75992 12.0002 10.0399 12.0002 10.6 12.0002H13.4C13.9601 12.0002 14.2401 12.0002 14.454 12.1092C14.6422 12.2051 14.7951 12.3581 14.891 12.5462C15 12.7601 15 13.0402 15 13.6002V20.2002C15 20.4803 15 20.6203 15.0545 20.7272C15.1024 20.8213 15.1789 20.8978 15.273 20.9457C15.38 21.0002 15.52 21.0002 15.8 21.0002H17.8C18.9201 21.0002 19.4802 21.0002 19.908 20.7822C20.2843 20.5905 20.5903 20.2845 20.782 19.9082C21 19.4804 21 18.9203 21 17.8002V10.5653C21 9.99094 21 9.70376 20.926 9.4393C20.8604 9.20503 20.7526 8.98469 20.608 8.7891C20.4447 8.5683 20.218 8.39199 19.7646 8.03937L12.9823 2.76424Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <span class="font-semibold tracking-wider ml-4">
+                            Property Overview
+                        </span>
+                    </mat-card-title>
+                    <mat-card-content>
+                        Get a 360-degree view of your properties with detailed analytics on occupancy, rent collection, and maintenance schedules. Make informed decisions with at-a-glance performance indicators.
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card>
+                    <mat-card-title class="!flex items-center">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px" viewBox="0 0 24 24" fill="none">
+                                <g id="System / Data">
+                                <path id="Vector" d="M18 12V17C18 18.6569 15.3137 20 12 20C8.68629 20 6 18.6569 6 17V12M18 12V7M18 12C18 13.6569 15.3137 15 12 15C8.68629 15 6 13.6569 6 12M18 7C18 5.34315 15.3137 4 12 4C8.68629 4 6 5.34315 6 7M18 7C18 8.65685 15.3137 10 12 10C8.68629 10 6 8.65685 6 7M6 12V7" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </g>
+                                </svg>
+                        </span>
+                        <span class="font-semibold tracking-wider ml-4">
+                            Data Management
+
+                        </span>
+                    </mat-card-title>
+                    <mat-card-content>
+                        Organize all your property data in one place. Have secure and structured access to all your information, simplifying property management.
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card>
+                    <mat-card-title class="!flex items-center">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px" viewBox="0 0 24 24" fill="none">
+                                <path d="M13 2C10.2386 2 8 4.23858 8 7C8 7.55228 8.44772 8 9 8C9.55228 8 10 7.55228 10 7C10 5.34315 11.3431 4 13 4H17C18.6569 4 20 5.34315 20 7V17C20 18.6569 18.6569 20 17 20H13C11.3431 20 10 18.6569 10 17C10 16.4477 9.55228 16 9 16C8.44772 16 8 16.4477 8 17C8 19.7614 10.2386 22 13 22H17C19.7614 22 22 19.7614 22 17V7C22 4.23858 19.7614 2 17 2H13Z" fill="#000000"/>
+                                <path d="M3 11C2.44772 11 2 11.4477 2 12C2 12.5523 2.44772 13 3 13H11.2821C11.1931 13.1098 11.1078 13.2163 11.0271 13.318C10.7816 13.6277 10.5738 13.8996 10.427 14.0945C10.3536 14.1921 10.2952 14.2705 10.255 14.3251L10.2084 14.3884L10.1959 14.4055L10.1915 14.4115C10.1914 14.4116 10.191 14.4122 11 15L10.1915 14.4115C9.86687 14.8583 9.96541 15.4844 10.4122 15.809C10.859 16.1336 11.4843 16.0346 11.809 15.5879L11.8118 15.584L11.822 15.57L11.8638 15.5132C11.9007 15.4632 11.9553 15.3897 12.0247 15.2975C12.1637 15.113 12.3612 14.8546 12.5942 14.5606C13.0655 13.9663 13.6623 13.2519 14.2071 12.7071L14.9142 12L14.2071 11.2929C13.6623 10.7481 13.0655 10.0337 12.5942 9.43937C12.3612 9.14542 12.1637 8.88702 12.0247 8.7025C11.9553 8.61033 11.9007 8.53682 11.8638 8.48679L11.822 8.43002L11.8118 8.41602L11.8095 8.41281C11.4848 7.96606 10.859 7.86637 10.4122 8.19098C9.96541 8.51561 9.86636 9.14098 10.191 9.58778L11 9C10.191 9.58778 10.1909 9.58773 10.191 9.58778L10.1925 9.58985L10.1959 9.59454L10.2084 9.61162L10.255 9.67492C10.2952 9.72946 10.3536 9.80795 10.427 9.90549C10.5738 10.1004 10.7816 10.3723 11.0271 10.682C11.1078 10.7837 11.1931 10.8902 11.2821 11H3Z" fill="#000000"/>
+                                </svg>
+                        </span>
+                        <span class="font-semibold tracking-wider ml-4">
+                            Easy Sign Up
+
+                        </span>
+                    </mat-card-title>
+                    <mat-card-content>
+                        Start managing your properties quickly with a simple GOOGLE sign-up. Access the platform’s full capabilities with minimal steps, ensuring a user-friendly experience from the get-go.
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card>
+                    <mat-card-title class="!flex items-center">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px" viewBox="0 0 24 24" fill="none">
+                                <path d="M12.25 12.5C12.25 13.6046 11.3546 14.5 10.25 14.5C9.14543 14.5 8.25 13.6046 8.25 12.5C8.25 11.3954 9.14543 10.5 10.25 10.5C11.3546 10.5 12.25 11.3954 12.25 12.5Z" fill="#1F2328"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.25 4.5L20 10.1893V18H16.5V20H4V11.9393L10.25 5.68933L11.625 7.06433L14.25 4.5ZM18.5 10.8107V16.5H16.5V11.9393L12.6857 8.12499L14.25 6.56065L18.5 10.8107ZM5.5 12.5607V18.5H6.78545C7.02806 16.8038 8.48677 15.5 10.25 15.5C12.0132 15.5 13.4719 16.8038 13.7146 18.5H15V12.5607L10.25 7.81065L5.5 12.5607Z" fill="#1F2328"/>
+                                </svg>
+                        </span>
+                        <span class="font-semibold tracking-wider ml-4">
+                            Tenant Management
+
+                        </span>
+                    </mat-card-title>
+                    <mat-card-content>
+                        Get all your tenants information at one place, from Tenant's contact to Rent amount, all at a single glance.
+                    </mat-card-content>
+                </mat-card>
+
+            </div>
+        </div>
+    </section>
+    <footer class="flex justify-around items-center text-xl bg-slate-900 text-[#fefefe] p-4 mt-12">
+        <div>All Rights Reserved</div>
+        <div>Social media icons</div>
+    </footer>
+</main>

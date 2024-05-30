@@ -22,6 +22,7 @@ import { DataEntryComponent } from './components/dashboard/data-entry/data-entry
 import { InvoiceOverviewComponent } from './components/dashboard/invoice-overview/invoice-overview.component';
 import { AddPropertyDialogComponent } from './components/add-property-dialog/add-property-dialog.component';
 import { AddTenantDialogComponent } from './components/add-tenant-dialog/add-tenant-dialog.component';
+import { TenantManagementComponent } from './components/dashboard/tenant-management/tenant-management.component';
 // import { getAuth } from 'firebase/auth';
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { AddTenantDialogComponent } from './components/add-tenant-dialog/add-ten
     DataEntryComponent,
     InvoiceOverviewComponent,
     AddPropertyDialogComponent,
-    AddTenantDialogComponent
+    AddTenantDialogComponent,
+    TenantManagementComponent,
+    
   ],
   imports: [
     BrowserModule,

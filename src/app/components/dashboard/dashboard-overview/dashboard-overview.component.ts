@@ -27,13 +27,6 @@ export class DashboardOverviewComponent implements OnInit{
         "tenantId": "T2",
         "totalRent": 35000
       },
-      {
-        "propertyId": "P1",
-        "paidRent": 15000,
-        "pendingRent": 20000,
-        "tenantId": "T3",
-        "totalRent": 35000
-      }
     ],
     'February':[
       {
@@ -48,13 +41,6 @@ export class DashboardOverviewComponent implements OnInit{
         "paidRent": 15000,
         "pendingRent": 20000,
         "tenantId": "T2",
-        "totalRent": 35000
-      },
-      {
-        "propertyId": "P1",
-        "paidRent": 15000,
-        "pendingRent": 20000,
-        "tenantId": "T3",
         "totalRent": 35000
       }
     ],
@@ -72,13 +58,6 @@ export class DashboardOverviewComponent implements OnInit{
         "pendingRent": 20000,
         "tenantId": "T2",
         "totalRent": 35000
-      },
-      {
-        "propertyId": "P1",
-        "paidRent": 15000,
-        "pendingRent": 20000,
-        "tenantId": "T3",
-        "totalRent": 35000
       }
     ],
     'April':[
@@ -89,20 +68,7 @@ export class DashboardOverviewComponent implements OnInit{
         "tenantId": "T1",
         "totalRent": 35000
       },
-      {
-        "propertyId": "P1",
-        "paidRent": 15000,
-        "pendingRent": 20000,
-        "tenantId": "T2",
-        "totalRent": 35000
-      },
-      {
-        "propertyId": "P1",
-        "paidRent": 15000,
-        "pendingRent": 20000,
-        "tenantId": "T3",
-        "totalRent": 35000
-      }
+      
     ],
     'May':[
       {
@@ -112,20 +78,7 @@ export class DashboardOverviewComponent implements OnInit{
         "tenantId": "T1",
         "totalRent": 35000
       },
-      {
-        "propertyId": "P1",
-        "paidRent": 15000,
-        "pendingRent": 20000,
-        "tenantId": "T2",
-        "totalRent": 35000
-      },
-      {
-        "propertyId": "P1",
-        "paidRent": 15000,
-        "pendingRent": 20000,
-        "tenantId": "T3",
-        "totalRent": 35000
-      }
+      
     ],
     'June':[
       {
@@ -136,17 +89,10 @@ export class DashboardOverviewComponent implements OnInit{
         "totalRent": 35000
       },
       {
-        "propertyId": "P1",
+        "propertyId": "P2",
         "paidRent": 15000,
         "pendingRent": 20000,
         "tenantId": "T2",
-        "totalRent": 35000
-      },
-      {
-        "propertyId": "P1",
-        "paidRent": 15000,
-        "pendingRent": 20000,
-        "tenantId": "T3",
         "totalRent": 35000
       }
     ],
@@ -159,19 +105,13 @@ export class DashboardOverviewComponent implements OnInit{
         "totalRent": 35000
       },
       {
-        "propertyId": "P1",
+        "propertyId": "P2",
         "paidRent": 15000,
         "pendingRent": 20000,
         "tenantId": "T2",
         "totalRent": 35000
       },
-      {
-        "propertyId": "P1",
-        "paidRent": 15000,
-        "pendingRent": 20000,
-        "tenantId": "T3",
-        "totalRent": 35000
-      }
+      
     ],
     'August':[
       {
@@ -188,13 +128,7 @@ export class DashboardOverviewComponent implements OnInit{
         "tenantId": "T2",
         "totalRent": 35000
       },
-      {
-        "propertyId": "P1",
-        "paidRent": 15000,
-        "pendingRent": 20000,
-        "tenantId": "T3",
-        "totalRent": 35000
-      }
+     
     ],
     'September':[
       {
@@ -211,13 +145,7 @@ export class DashboardOverviewComponent implements OnInit{
         "tenantId": "T2",
         "totalRent": 35000
       },
-      {
-        "propertyId": "P1",
-        "paidRent": 15000,
-        "pendingRent": 20000,
-        "tenantId": "T3",
-        "totalRent": 35000
-      }
+     
     ],
     'October':[
       {
@@ -234,13 +162,7 @@ export class DashboardOverviewComponent implements OnInit{
         "tenantId": "T2",
         "totalRent": 35000
       },
-      {
-        "propertyId": "P1",
-        "paidRent": 15000,
-        "pendingRent": 20000,
-        "tenantId": "T3",
-        "totalRent": 35000
-      }
+   
     ],
     'November':[
       {
@@ -257,13 +179,7 @@ export class DashboardOverviewComponent implements OnInit{
         "tenantId": "T2",
         "totalRent": 35000
       },
-      {
-        "propertyId": "P1",
-        "paidRent": 15000,
-        "pendingRent": 20000,
-        "tenantId": "T3",
-        "totalRent": 35000
-      }
+   
     ],
     'December':[
       {
@@ -280,13 +196,7 @@ export class DashboardOverviewComponent implements OnInit{
         "tenantId": "T2",
         "totalRent": 35000
       },
-      {
-        "propertyId": "P1",
-        "paidRent": 15000,
-        "pendingRent": 20000,
-        "tenantId": "T3",
-        "totalRent": 35000
-      }
+
     ],
   }
   testTenantDb = [
@@ -365,14 +275,18 @@ export class DashboardOverviewComponent implements OnInit{
   getTableData(month:string){
   const selectedProp= this.propertyListFormcontrol.value
   const selectedMonth = month
-  const tenantData = this.testTenantDb.filter(e=>e.propertyId == selectedProp.propertyId);
+  const tenantData = this.firmData.tenantDatabase.filter(e=>e.propertyId == selectedProp.propertyId);
   const rentData = this.filterObjectByKey(this.testRentDB,selectedMonth).filter((e:any)=>e.propertyId == selectedProp.propertyId);
-  const tempData = new Map()
-  tenantData.forEach(tenant=> tempData.set(tenant.tenantId, tenant))
-  rentData.forEach((rent:any) => tempData.set(rent.tenantId,{...tempData.get(rent.tenantId),...rent}))
-  let tableData = Array.from(tempData.values())
-  console.log(tableData)
-  this.dataSource = new MatTableDataSource(tableData)
+  if(tenantData.length > 0 && rentData.length > 0){
+    const tempData = new Map()
+    tenantData.forEach(tenant=> tempData.set(tenant.tenantId, tenant))
+    rentData.forEach((rent:any) => tempData.set(rent.tenantId,{...tempData.get(rent.tenantId),...rent}))
+    let tableData = Array.from(tempData.values())
+    console.log(tableData)
+    this.dataSource = new MatTableDataSource(tableData)
+  }else{
+    this.dataSource = new MatTableDataSource()
+  }
   }
   filterObjectByKey(obj:any,key:string){
     return obj[key]
@@ -391,7 +305,7 @@ export class DashboardOverviewComponent implements OnInit{
     }
   formatTimeStampToDate(timeStamp:any){
     
-  const milliseconds = timeStamp.seconds * 1000 + Math.floor(timeStamp.nanoseconds / 1e6);
+  const milliseconds = timeStamp?.seconds * 1000 + Math.floor(timeStamp?.nanoseconds / 1e6);
   const date = new Date(milliseconds);
   
   const day = String(date.getUTCDate()).padStart(2, '0');
@@ -403,6 +317,8 @@ export class DashboardOverviewComponent implements OnInit{
   }
   monthSelectionChange(event:any){
     this.getFirmRentdata(event?.value)
-    this.getTableData(event?.value)
+    if(this.propertyListFormcontrol.value){
+      this.getTableData(event?.value)
+    }
   }
 }

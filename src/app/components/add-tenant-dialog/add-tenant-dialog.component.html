@@ -1,1 +1,59 @@
-<p>add-tenant-dialog works!</p>
+<main>
+    <div>
+      <form [formGroup]="tenantForm" class="flex flex-col">
+        <!-- Property Selection -->
+        <mat-form-field appearance="fill">
+          <mat-label>Select the Property</mat-label>
+          <mat-select (selectionChange)="onPropSelect($event)" formControlName="propName">
+            <mat-option *ngFor="let property of properties" [value]="property">
+              {{ property.propertyName }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="tenantForm.get('propName')?.invalid">Please select a property</mat-error>
+        </mat-form-field>
+  
+        <!-- Tenant Name Input -->
+        <mat-form-field appearance="fill">
+          <mat-label>Add Tenant Name</mat-label>
+          <input matInput placeholder="Tenant Name" formControlName="tenantName">
+          <mat-error *ngIf="tenantForm.get('tenantName')?.invalid">Please enter the Tenant Name</mat-error>
+        </mat-form-field>
+  
+        <!-- Tenant Number Input -->
+        <mat-form-field appearance="fill">
+          <mat-label>Add Tenant Number</mat-label>
+          <input matInput placeholder="Tenant Number" type="number" formControlName="tenantNumber">
+          <mat-error *ngIf="tenantForm.get('tenantNumber')?.invalid">Please enter the Tenant Number</mat-error>
+        </mat-form-field>
+  
+        <!-- Rent Amount Input -->
+        <mat-form-field appearance="fill">
+          <mat-label>Add the Rent Amount</mat-label>
+          <input matInput placeholder="Rent Amount" type="number" formControlName="rentAmount">
+          <mat-error *ngIf="tenantForm.get('rentAmount')?.invalid">Please enter the rent amount</mat-error>
+        </mat-form-field>
+  
+        <!-- Rent Start Date Picker -->
+        <mat-form-field appearance="fill">
+          <mat-label>Choose the Registration Date</mat-label>
+          <input matInput [matDatepicker]="picker" placeholder="Registration Date" formControlName="rentStartDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="tenantForm.get('rentStartDate')?.invalid">Please enter the registration date</mat-error>
+        </mat-form-field>
+  
+        <!-- Rent Due Date Input -->
+        <mat-form-field appearance="fill">
+          <mat-label>Add Due Date of Rent for Each Month</mat-label>
+          <input matInput placeholder="Rent Due Date" type="number" formControlName="rentDueDate">
+          <mat-error *ngIf="tenantForm.get('rentDueDate')?.invalid">Please enter the due date</mat-error>
+        </mat-form-field>
+  
+        <!-- Submit Button -->
+        <button mat-raised-button color="primary" [disabled]="tenantForm.invalid" (click)="addTenant()">
+          Save and Apply Changes
+        </button>
+      </form>
+    </div>
+  </main>
+  

@@ -32,8 +32,8 @@ export class RegisterComponentComponent implements OnInit {
   
   constructor(private formBuilder: FormBuilder,
      private authService:AuthServiceService,
-     private router:Router,
      private messageBusService:MessageBusService,
+     private router:Router,
      private dialogRef:MatDialogRef<RegisterComponentComponent>,
      @Inject(MAT_DIALOG_DATA) public data:any) { }
 
@@ -54,12 +54,19 @@ export class RegisterComponentComponent implements OnInit {
     this.dialogRef.close()
   }
   setFirmDataInDatabase(){
-    let initialData:FirmData 
-        initialData = {...this.registrationForm.value}
-        initialData.firmId = initialData['email']
-        initialData['userDatabase']= [this.data]
-        initialData['adminList'] = [this.data.email]
-        initialData['firmRentdata'] = this.firmRentDataObj
+    // let initialData:FirmData 
+    //     initialData = {...this.registrationForm.value}
+    //     initialData.firmId = initialData['email']
+    //     initialData['userDatabase']= [this.data]
+    //     initialData['adminList'] = [this.data.email]
+    //     initialData['firmRentdata'] = this.firmRentDataObj
+    const initialData: FirmData = {
+      ...this.registrationForm.value,
+      firmId: this.registrationForm.value.email,
+      userDatabase: [this.data],
+      adminList: [this.data.email],
+      firmRentdata: this.firmRentDataObj
+    };
         console.log(initialData)
         this.authService.setInitialData(initialData,initialData.firmId)
         this.messageBusService.setFirmdatabase(initialData)

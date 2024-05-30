@@ -38,21 +38,22 @@ $rent-management-ui-theme: mat.define-light-theme((
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.login-dialog-container .mat-dialog-container{
-  padding: 0px !important;
-}
-.register-dialog-container .mat-dialog-container{
-  padding: 0px !important;
+body { margin: 0; font-family: "Lato", sans-serif !important; }
+.mat-dialog-container{
+  // padding: 0px !important;
+  background-image: linear-gradient( 109.6deg,  rgba(112,246,255,0.33) 11.2%, rgba(221,108,241,0.26) 42%, rgba(229,106,253,0.71) 71.5%, rgba(123,183,253,1) 100.2% );
 }
 
+
 .side-nav-btn{
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   padding: 8px 12px;
   background-color: #f3f3fb;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
+  letter-spacing: 1px;
+  cursor: pointer;
 }
 .side-nav-btn:hover{
   -webkit-box-shadow: -1px -2px 35px 0px rgba(93,170,189,0.47);
@@ -62,7 +63,29 @@ box-shadow: -1px -2px 35px 0px rgba(93,170,189,0.47);
 .green-check {
   color: green;
 }
-
+.mat-card-title,.mat-cell,.mat-card-content,.mat-expansion-panel-header-description,.mat-expansion-panel-content,.mat-expansion-panel-header-title,.mat-select-value-text.mat-select-min-line {
+  font-family: "Lato", sans-serif !important;
+}
 .red-close {
   color: red;
+}
+
+.primary-btn{
+  background-color:#2C3E50;
+  color: #FFFFFF;
+  border: none; 
+}
+.primary-btn:hover{
+  background-color: #1A252F;
+}
+.secondary-btn{
+  background-color:  #3498DB;
+  color: #FFFFFF;
+  border: none;
+}
+.secondary-btn:hover{
+  background-color: #2980B9;
+}
+.primary-text{
+  color: #2C3E50;
 }

@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
     next:(res)=>{
       console.log(res)
       if(res)
+
       this.router.navigate(['/dashboard']);
     },
     error:(e)=>{
@@ -52,6 +53,7 @@ export class HeaderComponent implements OnInit {
     this.afAuth.logout().subscribe({
       next:()=>{
         this.router.navigate(['']);
+        sessionStorage.removeItem('currentUser');
       }
     });
   }

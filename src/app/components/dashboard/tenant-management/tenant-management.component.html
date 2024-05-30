@@ -1,0 +1,87 @@
+<div class="edit-currnet-data-container p-[4%]">
+    <mat-accordion>
+        <ng-container *ngFor="let data of panelData">
+            <mat-expansion-panel class="!mt-4">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="text-xl">
+                        {{data.tenantName}}
+                    </mat-panel-title>
+                    <mat-panel-description class="text-lg">
+                        {{data.propertyName}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                        <div class="flex justify-start gap-[15%] mt-8">
+                            <div class="header-row gap-6 flex flex-col justify-around text-xl font-bold">
+                                <div class="px-5">Rent Amount <button mat-icon-button (click)="editTenantData('rentamnt')">
+                                    <mat-icon mat-icon-button>create</mat-icon>
+                                </button>
+                            </div>
+                                <div class="px-5">Rent Due Date <button mat-icon-button (click)="editTenantData('rentduedate')">
+                                    <mat-icon mat-icon-button>create</mat-icon>
+                                </button>
+                            </div>
+                                <div class="px-5">Registration Date <button mat-icon-button (click)="editTenantData('registrationdate')">
+                                    <mat-icon mat-icon-button>create</mat-icon>
+                                </button>
+                            </div>
+                                <div class="px-5">Phone Number <button mat-icon-button (click)="editTenantData('phonenumber')">
+                                    <mat-icon mat-icon-button>create</mat-icon>
+                                </button>
+                            </div>
+                            </div>
+                            <div class="data-row gap-5 flex flex-col justify-around text-xl">
+                                <div class="px-5">
+                                    <div *ngIf="!rentamntFlag">
+                                        {{data.rentAmount |  currency:'INR':'symbol':'1.0'}}
+                                    </div>
+                                    <mat-form-field *ngIf="rentamntFlag">
+                                        <mat-label>Change Rent Amount</mat-label>
+                                        <input matInput  type="number" [formControl]="rentAmount">
+                                        <mat-error></mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="px-5">
+                                    <div  *ngIf="!rentduedateFlag">
+                                        {{data.rentDueDate + " Of every month"}}
+                                    </div>
+                                    <mat-form-field *ngIf="rentduedateFlag">
+                                        <mat-label>Change Rent Due Date (ex.Enter 1 for 1st DOM )</mat-label>
+                                        <input matInput type="number" [formControl]="rentDueDate">
+                                        <mat-error></mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="px-5">
+                                    <div *ngIf="!registrationdateFlag">
+                                        {{formatTimeStampToDate(data.rentStartDate)}}
+                                    </div>
+                                    <mat-form-field *ngIf="registrationdateFlag" appearance="fill">
+                                        <mat-label>Change the Registration Date</mat-label>
+                                        <input matInput [matDatepicker]="picker" placeholder="Registration Date" [formControl]="rentStartDate">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        <mat-error >Please enter the registration date</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="px-5">
+                                    <div *ngIf="!phonenumberFlag">
+                                        {{data.phone}}
+                                    </div>
+                                    <mat-form-field *ngIf="phonenumberFlag">
+                                        <mat-label>Change Phone Number</mat-label>
+                                        <input matInput type="number" [formControl]="phoneNumber">
+                                        <mat-error></mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <mat-action-row *ngIf="phonenumberFlag || registrationdateFlag || rentduedateFlag || rentamntFlag">
+                         <button mat-raised-button class="relative !text-xl right-[50%]" color="primary" (click)="updateTenantDetails(data)">
+                            Update
+                        </button>
+                       </mat-action-row>
+            </mat-expansion-panel>
+        </ng-container>
+    </mat-accordion>
+</div>

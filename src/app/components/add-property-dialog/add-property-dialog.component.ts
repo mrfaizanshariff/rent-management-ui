@@ -32,7 +32,9 @@ export class AddPropertyDialogComponent implements OnInit {
   setPropDetails(){
       this.propDataBase['firmId'] = this.firmData.firmId
       if(this.firmData.propertyDatabase.length > 0){
-        this.propDataBase['propertyId'] = `P${this.firmData.propertyDatabase.length+1}`
+        this.propDataBase['propertyId'] = `P${Number(this.firmData.propertyDatabase[this.firmData.propertyDatabase.length-1].propertyId.slice(1)+1)}`
+      }else{
+        this.propDataBase['propertyId'] ="P1"
       }
     }
   addProp(){

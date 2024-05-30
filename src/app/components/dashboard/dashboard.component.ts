@@ -29,11 +29,14 @@ export class DashboardComponent implements OnInit,AfterViewInit {
      private dialogRef:MatDialog,
     private router:Router,
     private messageBusService:MessageBusService) {
-      messageBusService.getFirmDatabase().subscribe({
+      this.messageBusService.getFirmDatabase().subscribe({
         next:(response:any)=>{
           this.firmData = response
+        },
+        error: (err) => {
+          console.error('Error fetching firm data:', err);
         }
-      })
+      });
      }
   ngAfterViewInit(): void {
     // this.checkAdmin() ? this.buttonList.push("Enter Data"): null
@@ -49,17 +52,24 @@ export class DashboardComponent implements OnInit,AfterViewInit {
 
 //gets the current user from the database
  getCurrentUser(){
-  this.authService.getCurrentUser().subscribe({
-    next:(user:any)=>{
-      if(user){
-        this.initializeCurrentUser(user)
-      }else{
-        //TODO give the google sign in popup when the user refresh the dashboard page
-        // this.router.navigate([''])
+  const currUser = sessionStorage.getItem('currentUser')
+  if(currUser){
+    this.currentUser = JSON.parse(currUser)
+    this.messageBusService.setCurrentUser(this.currentUser)    
+
+  }else{
+    this.authService.getCurrentUser().subscribe({
+      next:(user:any)=>{
+        if(user){
+          this.initializeCurrentUser(user)
+        }else{
+          //TODO give the google sign in popup when the user refresh the dashboard page
+          this.router.navigate([''])
+        }
+        
       }
-      
-    }
-  }) 
+    }) 
+  }
  }
 
  // gets all data from the database
@@ -79,11 +89,9 @@ export class DashboardComponent implements OnInit,AfterViewInit {
        let userBelongsToFirm = false
        let firmId = ''
        let firmIndex:number = 0
-       let setAsAdmin = false
       
        data?.docs?.forEach((firm:any,index:number)=>{
         //check if user belongs to any firm or not
-        console.log(firm.data())
         if(firm?.data()?.adminList?.includes(this.currentUser.email) || 
            firm?.data()?.userList?.includes(this.currentUser.email)){
           userBelongsToFirm = true;
@@ -112,6 +120,9 @@ export class DashboardComponent implements OnInit,AfterViewInit {
        }
        this.checkAdmin()
       }
+    },
+    error: (err) => {
+      console.error('Error fetching all data:', err);
     }
   })
  }
@@ -123,14 +134,17 @@ export class DashboardComponent implements OnInit,AfterViewInit {
           this.currentUser.photoUrl = user?.multiFactor?.user.photoURL
           this.currentUser.uid = user?.multiFactor?.user.uid
           this.currentUser.userCreatedTime = new Date(user?.multiFactor.user.metadata.creationTime)
-          this.messageBusService.setCurrentUser(this.currentUser)          
+          this.messageBusService.setCurrentUser(this.currentUser)    
+          sessionStorage.setItem('currentUser', JSON.stringify(this.currentUser))      
         }
 
-  checkAdmin(){
+  checkAdmin():boolean{
     if(this.firmData?.adminList.some(a=>a==this.currentUser.email)){
-      this.currentUser.role == 'admin';
+      this.currentUser.role = 'admin';
       this.messageBusService.setCurrentUser(this.currentUser)
-      this.buttonList.push("Enter Data")
+      this.buttonList.push("Enter Data");
+      this.buttonList.push("Tenant Overview");
+      this.buttonList.push("Property Overview");
       return true;
     }else{
       return false;
@@ -138,20 +152,19 @@ export class DashboardComponent implements OnInit,AfterViewInit {
   }
 
   pageNavigation(flag:string){
-    if(flag.toLowerCase()=="generate invoice"){
-      this.pageName = flag.toLowerCase();
+    this.pageName = flag.toLowerCase();
+    if (this.pageName === 'generate invoice') {
       this.router.navigate(['/dashboard/invoice']);
-
-    }else if(flag.toLowerCase()=="overview"){
-      this.pageName = flag.toLowerCase();
+    } else if (this.pageName === 'overview') {
       this.router.navigate(['/dashboard/overview']);
-
-    }else if(flag.toLowerCase()=="profile"){
-      this.pageName = flag.toLowerCase();
-    }else if(flag.toLowerCase()=="enter data"){
-      this.pageName = flag.toLowerCase();
+    } else if (this.pageName === 'profile') {
+      // Navigate to profile page if needed
+    } else if (this.pageName === 'enter data') {
       this.router.navigate(['/dashboard/dataentry']);
-
-    }
+    } else if (this.pageName === 'tenant overview') {
+      this.router.navigate(['/dashboard/tenantoverview']); 
+    } else if (this.pageName === 'property overview') {
+      this.router.navigate(['/dashboard/propertyoverview']);
+    } 
   }
 }

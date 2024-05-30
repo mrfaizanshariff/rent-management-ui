@@ -5,6 +5,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { DashboardOverviewComponent } from './components/dashboard/dashboard-overview/dashboard-overview.component';
 import { InvoiceOverviewComponent } from './components/dashboard/invoice-overview/invoice-overview.component';
 import { DataEntryComponent } from './components/dashboard/data-entry/data-entry.component';
+import { PropertyManagementComponent } from './components/dashboard/property-management/property-management.component';
+import { TenantManagementComponent } from './components/dashboard/tenant-management/tenant-management.component';
 
 const routes: Routes = [
   
@@ -13,6 +15,8 @@ const routes: Routes = [
     { path: 'overview', component: DashboardOverviewComponent },
     { path: 'invoice', component: InvoiceOverviewComponent },
     { path: 'dataentry', component: DataEntryComponent },
+    { path: 'tenantoverview', component: TenantManagementComponent },
+    { path: 'propertyoverview', component: PropertyManagementComponent },
 
   ]}
 ];

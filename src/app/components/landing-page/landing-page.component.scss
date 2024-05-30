@@ -1,0 +1,52 @@
+$primaty-color:#2abff1;
+$secondary-color:#fefefd;
+$txt-btn-color-1:#330655;
+$txt-btn-color-2:#5d2376;
+
+.main-container{
+    background-color: $primaty-color;
+    font-family: "Lato", sans-serif !important;
+    h1{
+        color: $txt-btn-color-1;
+    }
+    h2{
+        color: $txt-btn-color-2;
+    }
+    .hero-section{
+        .left{
+            position: relative;
+        }
+        .left::after{
+            content: "";
+            width: 100%;
+            height: 20%;
+            background: $secondary-color;
+            border-top-left-radius: 10rem;
+            border-top-right-radius: 10rem;
+            position: absolute;
+            top: 80%;
+            left: 0;
+        }
+    }
+    .features-section{
+        position: relative;
+        h1{
+            color: $txt-btn-color-1;
+        }
+        h2{
+          color: $txt-btn-color-2;  
+        }
+        .mat-card{
+            font-family: 'Lato',sans-serif !important;
+            .mat-card-title{
+                color: #330655 !important;
+            }
+            .mat-card-content{
+                font-size: 16px;
+                color: #5d2376 !important;
+            }
+        }
+        
+    }
+
+}

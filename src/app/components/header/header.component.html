@@ -1,9 +1,9 @@
-<nav *ngIf="!isLoggedIn" class="flex justify-between items-center px-6 py-2 text-black">
-    <div>About Us</div>
-    <div>Pricing</div>
-    <div (click)="registerLoginButton()">Register/Login</div>
+<nav *ngIf="!isLoggedIn" class="flex bg-[#fefefe] justify-between items-center px-6 py-2 text-black">
+    <div class="side-nav-btn">About Us</div>
+    <div class="side-nav-btn">Pricing</div>
+    <div class="side-nav-btn" (click)="registerLoginButton()">Register/Login</div>
 </nav>
-<nav *ngIf="isLoggedIn" class="flex justify-between items-center px-6 py-2 text-black">
-    <div>{{firmData?.firmName}}</div>
-    <div (click)="logout()">Logout</div>
+<nav *ngIf="isLoggedIn" class="flex bg-[#fefefe] justify-between items-center px-6 py-2 text-black">
+    <div class="side-nav-btn">{{firmData?.firmName}}</div>
+    <div class="side-nav-btn" (click)="logout()">Logout</div>
 </nav>

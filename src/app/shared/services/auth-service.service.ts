@@ -49,11 +49,14 @@ export class AuthServiceService {
  getAllFirmIds(firmId:string):Observable<any>{
   return from(this.fireStore.collection('firmIds',ref=>ref.where('firmId','==',firmId)).get())
  }
+ getFirmData(firmId:string):Observable<any>{
+  return from(this.fireStore.collection('firmDatabase',ref=>ref.where('firmId','==',firmId)).get())
+ }
  updateFirmDatabase(firmId:string,newData:any,fieldTobeUpdated:any){
   //get the document reference
   const firmDocRef: AngularFirestoreDocument =  this.fireStore.doc(`firmDatabase/${firmId}`);
   //getting the current doc data
-  firmDocRef.get().subscribe({
+  return of(firmDocRef.get().subscribe({
     next:(doc)=>{
       if(doc.exists){
         const currentData = doc.data()!;
@@ -91,11 +94,40 @@ export class AuthServiceService {
             .catch(error=>{
               console.log('Error updating property database: ', error);
             });
+            break
+          case 'tenantDatabase':
+            const currentTenantDatabase = currentData['tenantDatabase'] || [];
+            const updatedTenantDatabase = [...currentTenantDatabase, newData];
+            firmDocRef.update({ tenantDatabase: updatedTenantDatabase})
+            .then(()=>{
+              console.log("tenantDatabase successfully updated");
+            })
+            .catch(error=>{
+              console.log('Error updating tenantDatabase : ', error);
+            });
+            break;
+          case 'editTenantDatabase':
+            const currentEditTenantDatabase = currentData['tenantDatabase'] || [];
+            
+            currentEditTenantDatabase.forEach((tenant:any,index:number)=>{
+              if(tenant.tenantId == newData?.tenantId){
+                currentEditTenantDatabase[index] = newData
+              }
+            })
+            
+            firmDocRef.update({ tenantDatabase: currentEditTenantDatabase})
+            .then(()=>{
+              console.log("tenantDatabase successfully edited"); 
+            })
+            .catch(error=>{
+              console.log('Error updating tenantDatabase : ', error);
+            });
+            break;
         }
         
       }
     }
-  })
+  }))
  }
  
 
