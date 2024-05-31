@@ -45,15 +45,13 @@ import { PropertyManagementComponent } from './components/dashboard/property-man
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    provideAuth(()=>getAuth()),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    provideAuth(()=>getAuth()),
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    AngularFireAuthModule,
-    AngularFirestoreModule
   ],
   providers: [
     AngularFireAuth,
