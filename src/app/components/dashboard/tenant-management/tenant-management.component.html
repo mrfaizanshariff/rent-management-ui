@@ -76,10 +76,14 @@
                             </div>
                             
                         </div>
-                        <mat-action-row *ngIf="phonenumberFlag || registrationdateFlag || rentduedateFlag || rentamntFlag">
-                         <button mat-raised-button class="relative !text-xl right-[50%]" color="primary" (click)="updateTenantDetails(data)">
+                        <mat-action-row >
+                         <button *ngIf="phonenumberFlag || registrationdateFlag || rentduedateFlag || rentamntFlag" mat-raised-button class="relative !text-xl right-[50%]" color="primary" (click)="updateTenantDetails(data)">
                             Update
                         </button>
+                        <button mat-raised-button color="warn">
+                            Delete
+                        </button>
+
                        </mat-action-row>
             </mat-expansion-panel>
         </ng-container>
